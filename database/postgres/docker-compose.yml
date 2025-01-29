@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine  # PostgreSQL 이미지, 최신 안정 버전
+    container_name: local-postgres
+    environment:
+      POSTGRES_USER: root       # 데이터베이스 사용자명
+      POSTGRES_PASSWORD: 1234  # 데이터베이스 비밀번호
+      POSTGRES_DB: postgres     # 생성할 기본 데이터베이스 이름
+    ports:
+      - "5432:5432"            # 호스트와 컨테이너의 포트를 매핑
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # 데이터 영구 저장소 마운트
+
+volumes:
+  postgres_data:
+    driver: local
